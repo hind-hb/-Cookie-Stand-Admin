@@ -1,6 +1,10 @@
 # Lab 37: Cookie stand Admin
 using Next.js we made pages componenets and form to get values
-# PR : [LINK]()
+
+# PR : [LINK](https://github.com/hind-hb/-Cookie-Stand-Admin/pull/2/commits/664388aca53d04deb09b68197a4e6445bf77581f)
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 
 # Next.js + Tailwind CSS Example
 
