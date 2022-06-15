@@ -1,13 +1,16 @@
-
-import React, { useState } from "react";
 import CreateForm from './CreateForm.js';
 import ReportTable from './ReportTable.js';
 import Footer from './Footer'
+import { useEffect, useState } from "react"
 
 export default function Main() {
   const [workingHours, setworkingHours] = useState(['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'])
   const [report, setallstores] = useState([])
   const [totals, setbranchestotals] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  
+
+
+  
 
 
   function onCreate(event) {
