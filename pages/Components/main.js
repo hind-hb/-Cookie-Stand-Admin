@@ -1,39 +1,61 @@
 
+import React, { useState } from "react";
+import CreateForm from './CreateForm.js';
+import ReportTable from './ReportTable.js';
+import Footer from './Footer'
 
-function Main(props) {
-    return (
-      <div className="mx-auto my-8 bg-[#a1e6c5] w-3/4 text-center rounded-lg">
-          <form onSubmit={props.formHandle}>  
-        <div>
-          <h1 className="p-2 text-xl text-black text-bold">Create Cookie Stand</h1>
-        </div>
-        <div>
-            <label className="flex items-center m-3 text-black justify-content">Location<input type="text" placeholder="Location" name="location" required className="w-3/4 m-3 text-center text-black "/></label>
-        </div>
-        
-        <div className="flex m-3 text-center justify-evenly ">
-          <label className="flex-col text-black" >Minimum Customers Per Hour <input type="number" placeholder="" name="min" defaultValue="0" className="w-3/4 mx-2 text-center text-black textAlign: left" /></label>
-          <label className="flex-col text-black">Maximum Customers Per Hour <input type="number" placeholder="" name="max" defaultValue="0" className="w-3/4 mx-2 text-center text-black textAlign: left "/></label>
-          <label className="flex-col text-black">Average Cookies Per Sales <input type="number" placeholder="" name="avg" defaultValue="0" className="w-3/4 mx-2 text-center text-black textAlign: left "/></label>
-          <button type="submit" className="bg-[#7df5bb]  text-black p-5 rounded-lg">Create</button>
-  
-        </div>
-          <div>
-              <h1 className="p-2 text-xl text-bold"></h1>
-           </div>
-  
-          </form>
-  
-          
-      </div>
-    )
-  
+export default function Main() {
+  const [workingHours, setworkingHours] = useState(['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'])
+  const [report, setallstores] = useState([])
+  const [totals, setbranchestotals] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+
+  function onCreate(event) {
+
+      event.preventDefault();
+
+      let minCustomers = parseInt(event.target.minCustomers.value)
+      let maxCustomers = parseInt(event.target.maxCustomers.value)
+      let avgCookies = parseInt(event.target.avgCookies.value)
+
+      let sum = 0
+
+
+      const store = {
+          location: event.target.location.value,
+          hourlySales: workingHours.map(() => Math.ceil(avgCookies * (Math.ceil(Math.random() * (maxCustomers - minCustomers) + minCustomers)))),
+      }
+
+      for (let i = 0; i < store.hourlySales.length; i++) {
+          sum = sum + store.hourlySales[i]
+      }
+      store.total = sum
+
+      setallstores([...report, store])
+
+
+      let total_sum = totals.map((item, idx) => {
+          if (idx === totals.length - 1) {
+              return item + store.total
+          }
+          return item + store.hourlySales[idx]
+      })
+
+      setbranchestotals(total_sum)
+
   }
-  
-  export default Main
-  
-  
-  
-  
-  
-          
+
+  return (
+      <>
+          <main className="">
+              
+              <CreateForm onCreate={onCreate} />
+
+              <ReportTable report={report} workingHours={workingHours} totals={totals} />
+
+              <Footer report={report} />
+
+          </main>
+      </>
+  )
+}

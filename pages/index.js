@@ -1,6 +1,5 @@
 import Header from "./Components/Header";
 import Main from "./Components/main";
-import Footer from "./Components/Footer";
 
 import { useState } from "react";
 
@@ -22,11 +21,10 @@ export default function Home() {
     <div >
       
       <Header />
-      <Main formHandle={formHandle} />
-      <h1 className="text-center text-black">Report Table coming soon.............</h1>
-      <h1 className="text-center text-black">{JSON.stringify(report)}</h1>
+      <Main />
+      
 
-      <Footer />
+    
     </div>
   );
 }
