@@ -1,27 +1,25 @@
-import Header from "./Components/Header";
-import Main from "./Components/main";
+import CookieStandAdmin from "./Components/CookieStandAdmin";
+import LoginForm from "./Components/LoginForm";
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 
-import { useState } from "react";
 
-export default function Home() {
-  const [report, setReport] = useState((""));
+export default function Home() 
+  {
 
-  function formHandle(event) {
-    event.preventDefault();
-    const Location = {
-      location: event.target.location.value,
-      Min: event.target.min.value,
-      Max: event.target.max.value,
-      Avg: event.target.avg.value,
-    };
-
-    setReport(Location);
-  }
+    const [token, setToken] = useState(null);
+    const userData = {
+      username: 'admin',
+      password: 'admin1234'
+    }
+  
+  
   return (
     <div >
       
-      <Header />
-      <Main />
+      <CookieStandAdmin />
+      { <LoginForm /> }
+      
       
 
     
