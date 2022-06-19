@@ -1,9 +1,28 @@
-export default function ReportTable(props) {
-    if (props.report.length === 0) {
-        return (
-            <h2 className="mx-auto my-8 text-xl font-semibold text-center">No Cookie Stands Available</h2>
-        )
-    } else {
+import {useState, useEffect} from 'react'
+
+
+export default function ReportTable(props,{token}) {
+    const [data, setData] = useState([])
+    
+    const getData = async ()=>{
+        const config={
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        const data = await axios.get("https://cookie-stand6789a57b.herokuapp.com/api/token/",config)
+        return data.data;
+    }
+
+    useEffect(()=>{
+        getData().then(res=>{setData(res)})
+    },[])
+    
+    // if (props.report.length === 0) {
+    //     return (
+    //         <h2 className="mx-auto my-8 text-xl font-semibold text-center">No Cookie Stands Available</h2>
+    //     )
+    // } else {
         return (
             <table className='w-5/6 mx-auto mt-4 text-center border border-green-300 rounded-md'>
 
@@ -66,4 +85,4 @@ export default function ReportTable(props) {
             </table>
         )
     }
-}
+// }

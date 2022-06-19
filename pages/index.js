@@ -10,8 +10,19 @@ export default function Home()
     const [token, setToken] = useState(null);
     const userData = {
       username: 'admin',
-      password: 'admin1234'
+      password: 'admin1994'
     }
+    useEffect(()=>{
+      if (localStorage.token===undefined){
+          axios.post("https://cookie-stand6789a57b.herokuapp.com/api/token/", userData).then(res=>{
+          localStorage.setItem('token', res.data.access)
+          })
+          setToken(localStorage.getItem("token"))
+      }
+      setToken(localStorage.getItem("token"))
+  
+    }, [])
+  
   
   
   return (
